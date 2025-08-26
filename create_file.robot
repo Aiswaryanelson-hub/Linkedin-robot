@@ -18,6 +18,7 @@ Create And Push Project
     Run Process    git add .    shell=True
     Run Process    git commit -m "Initial commit: project + ${FILENAME}"    shell=True
     Run Process    git branch -M ${BRANCH}    shell=True
-    Run Process    git remote remove origin    shell=True    on_error=ignore
+    # Safely remove origin (ignore errors if it doesn't exist)
+    Run Process    git remote remove origin    shell=True    stderr=STDOUT    stdout=remote_remove.log
     Run Process    git remote add origin ${REPO_URL}    shell=True
     Run Process    git push -u origin ${BRANCH}    shell=True
