@@ -9,14 +9,13 @@ ${BRANCH}      main
 
 *** Test Cases ***
 Update And Push File
-    # Pull the latest changes (ensures .robot and txt are up-to-date)
+
     Run Process    git pull origin ${BRANCH}    shell=True
 
     # Update the text file
     Remove File    ${FILENAME}
     Create File    ${FILENAME}    ${NEW_CONTENT}
 
-    # Add all files again (so even if you modify .robot files, they go to GitHub)
     Run Process    git add .    shell=True
     Run Process    git commit -m "Updated ${FILENAME} and project files"    shell=True
     Run Process    git push origin ${BRANCH}    shell=True
